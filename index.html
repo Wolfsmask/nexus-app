@@ -250,6 +250,7 @@ footer a{color:var(--mint)}
       <div class="hero-meta">
         <div><b>On Zoom or in person</b>Withers Library &middot; Woodneath</div>
         <div><b>From $80 / hour</b>No package required</div>
+        <div><b>For students outside Liberty Public Schools</b>Liberty students are served free by the district</div>
       </div>
     </div>
     <img class="hero-logo" src="assets/logo.png" alt="Next Chapter College Coaching logo: an open book" width="800" height="783">
@@ -366,7 +367,7 @@ footer a{color:var(--mint)}
         <ul>
           <li>Side-by-side help with essays and applications</li>
           <li>Extra understanding, with questions answered in the moment</li>
-          <li>At a local library, with no travel charge inside Liberty</li>
+          <li>At a local library, face to face</li>
         </ul>
       </article>
       <article class="price">
@@ -381,7 +382,7 @@ footer a{color:var(--mint)}
     </div>
     <div class="note">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-6.5 8-12a8 8 0 10-16 0c0 5.5 8 12 8 12z"/><circle cx="12" cy="10" r="3"/></svg>
-      <div><strong>In Liberty?</strong> There&rsquo;s no travel fee. Meeting outside Liberty includes a small travel fee, confirmed before you book.</div>
+      <div><strong>Who can sign up?</strong> These services are for students who do <u>not</u> attend a Liberty public school. Liberty public school students already get college support free through the district, so they can&rsquo;t book paid sessions here.</div>
     </div>
     <div class="calc" aria-label="Estimate your cost">
       <div><label for="mode">How we meet</label>
@@ -390,7 +391,7 @@ footer a{color:var(--mint)}
         <input id="hours" type="number" min="1" max="40" value="3"></div>
       <div class="out"><small>Estimated total</small><span id="total">$300</span></div>
     </div>
-    <p class="fine">Estimate only; excludes any travel fee outside Liberty. You pay for the hours you use.</p>
+    <p class="fine">Estimate only. You pay for the hours you use, with nothing prepaid.</p>
   </div>
 </section>
 
@@ -433,6 +434,7 @@ footer a{color:var(--mint)}
 <section class="cream">
   <div class="wrap">
     <div class="head center"><span class="eyebrow">Questions</span><h2>Frequently asked</h2></div>
+    <details><summary>Can my student at a Liberty public school sign up?</summary><p>Not for paid sessions. Students at Liberty public schools already receive this kind of help for free through the district. Next Chapter College Coaching is for students who attend school outside of Liberty Public Schools.</p></details>
     <details><summary>Do I have to buy a package?</summary><p>No. You pay by the hour for the sessions you book, with no required package or upfront commitment.</p></details>
     <details><summary>Will you write my student&rsquo;s essays?</summary><p>No. Essays should sound like the student. I help with brainstorming, structure, and revision so the final work is theirs, and better.</p></details>
     <details><summary>My student is a senior and deadlines are close. Can you still help?</summary><p>Reach out right away. We&rsquo;ll tackle the nearest deadlines first and build a catch-up plan.</p></details>
@@ -465,6 +467,8 @@ footer a{color:var(--mint)}
         <div class="f"><label for="pref">Preferred format</label>
           <select id="pref"><option>Zoom</option><option>In person</option><option>Not sure yet</option></select></div>
       </div>
+      <div class="f"><label for="lib">Does your student attend a Liberty public school?</label>
+        <select id="lib"><option value="">Please choose</option><option value="no">No</option><option value="yes">Yes</option></select></div>
       <div class="f"><label for="msg">How can I help?</label><textarea id="msg" placeholder="Essays, scholarships, choosing schools, or &lsquo;I don&rsquo;t know where to start&rsquo;..."></textarea></div>
       <button class="btn btn-coral" type="submit">Send message</button>
       <div class="ok" id="ok" role="status"></div>
@@ -496,6 +500,14 @@ footer a{color:var(--mint)}
   f.addEventListener('submit',function(e){
     e.preventDefault();
     ok.style.display='block';
+    if(f.lib.value==='yes'){
+      ok.style.background='#fdf1e6';ok.style.borderColor='#fd9a7b';ok.style.color='#6b3a22';
+      ok.textContent='Students at Liberty public schools already receive this support free through the district, so they can\u2019t book paid sessions here. Please reach out to your school counselor.';return;
+    }
+    if(!f.lib.value){
+      ok.style.background='#fbeeee';ok.style.borderColor='#e0b4b4';ok.style.color='#7a2331';
+      ok.textContent='Please tell us whether your student attends a Liberty public school.';return;
+    }
     if(!f.name.value.trim()||!/^\S+@\S+\.\S+$/.test(f.email.value)){
       ok.style.background='#fbeeee';ok.style.borderColor='#e0b4b4';ok.style.color='#7a2331';
       ok.textContent='Please enter your name and a valid email.';return;
